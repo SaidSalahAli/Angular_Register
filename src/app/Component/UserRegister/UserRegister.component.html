@@ -10,8 +10,9 @@
       <div class="col">
         <div class="card card-registration my-4">
           <div class="card-body p-md-5 text-black">
-            <h1 class=" text-uppercase  d-flex justify-content-center">Sign In</h1>
-
+            <h1 class="text-uppercase d-flex justify-content-center">
+              Sign In
+            </h1>
             <div class="row">
               <div class="form-outline">
                 <label class="form-label label-up" for="form3Example1m"
@@ -64,6 +65,7 @@
                 >
                 <small *ngIf="email?.errors?.['EmailNotValid']">
                   Email must contain '@', and the value '{{ email?.errors?.['EmailNotValid'].value
+
 
 
 
@@ -174,9 +176,7 @@
                   </label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <label class="" for="otherGender"
-                    >Other</label
-                  >
+                  <label class="" for="otherGender">Other</label>
                   <input
                     type="radio"
                     formControlName="referral"
@@ -334,10 +334,10 @@
             <!-- <mat-icon>person</mat-icon> -->
             <!-- Submit button -->
             <button
-              *ngIf="userRegisterForm.invalid || !userRegisterForm.touched"
               type="submit"
               class="btn btn-primary"
-              (click)="submit()"
+              [disabled]="userRegisterForm.invalid || !userRegisterForm.touched"
+              (ngSubmit)="submit()"
             >
               Submit
             </button>

@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { ToastrService } from 'ngx-toastr';
 import { existEmailValidator } from 'src/app/CustomValidator/ExistEmail.validator';
 import { passwordMatch } from 'src/app/CustomValidator/PasswordMatch.validator';
+import { User } from 'src/app/Models/User';
 
 
 @Component({
@@ -35,14 +36,9 @@ export class UserRegisterComponent implements OnInit {
     }, { validators: [passwordMatch()] });
   }
   submit() {
-    if (this.userRegisterForm.invalid) {
-      this.toastr.warning('Please complete the form before submitting.');
-      return;
-    }
-    
     // Form is complete, continue with the submission logic
-    // let userModel = this.userRegisterForm.value as User;
-    this.toastr.success("Hello, I'm the toastr message.");
+    let userModel = this.userRegisterForm.value as User;
+      this.toastr.success("نورت الدنياالكلها ولله.");
   }
 
 
@@ -72,13 +68,6 @@ export class UserRegisterComponent implements OnInit {
     return this.userRegisterForm.get('referral');
   }
 
-  onEmailFocus() {
-    this.emailFocused = true;
-  }
-  
-  onEmailBlur() {
-    this.emailFocused = false;
-  }
   fillForm() {
     this.userRegisterForm.patchValue({
       fullName: 'said',
