@@ -38,7 +38,7 @@ export class UserRegisterComponent implements OnInit {
   submit() {
     // Form is complete, continue with the submission logic
     let userModel = this.userRegisterForm.value as User;
-      this.toastr.success("نورت الدنياالكلها ولله.");
+      this.toastr.success("نورت الدنيا الكلها ولله.");
   }
 
 

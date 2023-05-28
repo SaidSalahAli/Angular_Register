@@ -271,7 +271,9 @@
               />
               <div
                 class="alert alert-warning"
-                *ngIf="(confirmPassword?.touched && password?.touched) && (confirmPassword?.invalid || userRegisterForm?.errors?.['passwordTooShort'] || userRegisterForm?.errors?.['passwordContainsName'])"
+                *ngIf="(confirmPassword?.touched && password?.touched) && 
+                (confirmPassword?.invalid || userRegisterForm?.errors?.['passwordTooShort'] ||
+                 userRegisterForm?.errors?.['passwordContainsName'] || userRegisterForm?.errors?.['UnmatchedPassword'] )"
               >
                 <small *ngIf="confirmPassword?.errors?.['required']"
                   >Confirm Password is required</small
@@ -314,7 +316,9 @@
               <!-- Validation messages for Confirm Password -->
               <div
                 class="alert alert-warning"
-                *ngIf="(confirmPassword?.touched && password?.touched) && (confirmPassword?.invalid || userRegisterForm?.errors?.['passwordTooShort'] || userRegisterForm?.errors?.['passwordContainsName'])"
+                *ngIf="(confirmPassword?.touched && password?.touched) &&
+                        (confirmPassword?.invalid || userRegisterForm?.errors?.['passwordTooShort'] ||
+                         userRegisterForm?.errors?.['passwordContainsName'] || userRegisterForm?.errors?.['UnmatchedPassword'])"
               >
                 <small *ngIf="confirmPassword?.errors?.['required']"
                   >Confirm Password is required</small
