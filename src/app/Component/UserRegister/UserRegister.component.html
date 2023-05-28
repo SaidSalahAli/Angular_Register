@@ -10,7 +10,7 @@
       <div class="col">
         <div class="card card-registration my-4">
           <div class="card-body p-md-5 text-black">
-            <h3 class="mb-5 text-uppercase">Form</h3>
+            <h1 class=" text-uppercase  d-flex justify-content-center">Sign In</h1>
 
             <div class="row">
               <div class="form-outline">
@@ -64,6 +64,7 @@
                 >
                 <small *ngIf="email?.errors?.['EmailNotValid']">
                   Email must contain '@', and the value '{{ email?.errors?.['EmailNotValid'].value
+
 
 
 
@@ -173,7 +174,7 @@
                   </label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <label class="form-label label-up" for="otherGender"
+                  <label class="" for="otherGender"
                     >Other</label
                   >
                   <input
@@ -256,25 +257,36 @@
                 id="uPassword"
                 name="confirmPassword"
                 [class.is-invalid]="
-                confirmPassword?.value !== password?.value ||
-                (confirmPassword?.touched && confirmPassword?.invalid) ||
-                (password?.touched && password?.value?.length < 8)
-              "
-              [class.is-valid]="
-                confirmPassword?.value === password?.value &&
-                confirmPassword?.touched &&
-                !confirmPassword?.invalid &&
-                password?.touched &&
-                password?.value?.length >= 8
+                  confirmPassword?.value !== password?.value ||
+                  (confirmPassword?.touched && confirmPassword?.invalid) ||
+                  (password?.touched && password?.value?.length < 8)
+                "
+                [class.is-valid]="
+                  confirmPassword?.value === password?.value &&
+                  confirmPassword?.touched &&
+                  !confirmPassword?.invalid &&
+                  password?.touched &&
+                  password?.value?.length >= 8
                 "
               />
-              <div class="alert alert-warning" *ngIf="(confirmPassword?.touched && password?.touched) && (confirmPassword?.invalid || userRegisterForm?.errors?.['passwordTooShort'] || userRegisterForm?.errors?.['passwordContainsName'])">
-                <small *ngIf="confirmPassword?.errors?.['required']">Confirm Password is required</small>
-                <small *ngIf="userRegisterForm?.errors?.['UnmatchedPassword']">Confirm Password must match the password.</small>
-                <small *ngIf="userRegisterForm?.errors?.['passwordTooShort']">Password must be at least 8 characters long.</small>
-                <small *ngIf="userRegisterForm?.errors?.['passwordContainsName']">Password cannot contain the name.</small>
+              <div
+                class="alert alert-warning"
+                *ngIf="(confirmPassword?.touched && password?.touched) && (confirmPassword?.invalid || userRegisterForm?.errors?.['passwordTooShort'] || userRegisterForm?.errors?.['passwordContainsName'])"
+              >
+                <small *ngIf="confirmPassword?.errors?.['required']"
+                  >Confirm Password is required</small
+                >
+                <small *ngIf="userRegisterForm?.errors?.['UnmatchedPassword']"
+                  >Confirm Password must match the password.</small
+                >
+                <small *ngIf="userRegisterForm?.errors?.['passwordTooShort']"
+                  >Password must be at least 8 characters long.</small
+                >
+                <small
+                  *ngIf="userRegisterForm?.errors?.['passwordContainsName']"
+                  >Password cannot contain the name.</small
+                >
               </div>
-              
             </div>
             <div class="mb-3">
               <label class="form-label label-up" for="uConfirmPassword"
@@ -300,11 +312,23 @@
                 "
               />
               <!-- Validation messages for Confirm Password -->
-              <div class="alert alert-warning" *ngIf="(confirmPassword?.touched && password?.touched) && (confirmPassword?.invalid || userRegisterForm?.errors?.['passwordTooShort'] || userRegisterForm?.errors?.['passwordContainsName'])">
-                <small *ngIf="confirmPassword?.errors?.['required']">Confirm Password is required</small>
-                <small *ngIf="userRegisterForm?.errors?.['UnmatchedPassword']">Confirm Password must match the password.</small>
-                <small *ngIf="userRegisterForm?.errors?.['passwordTooShort']">Password must be at least 8 characters long.</small>
-                <small *ngIf="userRegisterForm?.errors?.['passwordContainsName']">Password cannot contain the name.</small>
+              <div
+                class="alert alert-warning"
+                *ngIf="(confirmPassword?.touched && password?.touched) && (confirmPassword?.invalid || userRegisterForm?.errors?.['passwordTooShort'] || userRegisterForm?.errors?.['passwordContainsName'])"
+              >
+                <small *ngIf="confirmPassword?.errors?.['required']"
+                  >Confirm Password is required</small
+                >
+                <small *ngIf="userRegisterForm?.errors?.['UnmatchedPassword']"
+                  >Confirm Password must match the password.</small
+                >
+                <small *ngIf="userRegisterForm?.errors?.['passwordTooShort']"
+                  >Password must be at least 8 characters long.</small
+                >
+                <small
+                  *ngIf="userRegisterForm?.errors?.['passwordContainsName']"
+                  >Password cannot contain the name.</small
+                >
               </div>
             </div>
             <!-- <mat-icon>person</mat-icon> -->
