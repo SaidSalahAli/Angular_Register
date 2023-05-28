@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { existEmailValidator } from 'src/app/CustomValidator/ExistEmail.validator';
 import { passwordMatch } from 'src/app/CustomValidator/PasswordMatch.validator';
-import { User } from 'src/app/Models/User';
+
 
 @Component({
   selector: 'app-UserRegister',
@@ -15,8 +16,9 @@ export class UserRegisterComponent implements OnInit {
   emailFocused: boolean = false;
 
 
-  constructor(private fb: FormBuilder) {
-    // this.existUserEmails = ['ss@aa', 'ss@bb', 'ss@cc', 'ss@dd', "saidsalah375@gmail.com"];
+  constructor(private fb: FormBuilder,
+    private toastr: ToastrService) {
+      // this.existUserEmails = ['ss@aa', 'ss@bb', 'ss@cc', 'ss@dd', "saidsalah375@gmail.com"];
     this.userRegisterForm = fb.group({
       fullName: ['', [Validators.required, Validators.pattern('[A-Z a-z]{4,}')]],
       email: ['', [Validators.required, existEmailValidator()]],
@@ -32,6 +34,17 @@ export class UserRegisterComponent implements OnInit {
       referralOther: [''],
     }, { validators: [passwordMatch()] });
   }
+  submit() {
+    if (this.userRegisterForm.invalid) {
+      this.toastr.warning('Please complete the form before submitting.');
+      return;
+    }
+    
+    // Form is complete, continue with the submission logic
+    // let userModel = this.userRegisterForm.value as User;
+    this.toastr.success("Hello, I'm the toastr message.");
+  }
+
 
   ngOnInit() { }
 
@@ -90,10 +103,6 @@ export class UserRegisterComponent implements OnInit {
     this.phoneNumber.removeAt(index);
   }
 
-  submit() {
-    let userModel = this.userRegisterForm.value as User;
-    console.log(userModel);
-  }
 
   updateReferralValidators() {
     if (this.referral?.value == 'other') {

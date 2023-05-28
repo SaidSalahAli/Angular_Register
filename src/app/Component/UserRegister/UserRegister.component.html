@@ -1,321 +1,322 @@
 <form
   class="h-100 bg-dark"
   [formGroup]="userRegisterForm"
-  (ngSubmit)="(submit)"
+  (ngSubmit)="submit()"
 >
-  <div class="container py-5 h-100 bg-dark">
-    <div class="row d-flex justify-content-center align-items-center h-100">
+  <div
+    class="container py-5 h-100 w-100 bg-dark d-flex justify-content-center align-items-center"
+  >
+    <div class="row">
       <div class="col">
         <div class="card card-registration my-4">
-          <div class="row g-0">
-            <div class="col-xl-6 d-none d-xl-block">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
-                alt="Sample photo"
-                class="img-fluid"
-                style="
-                  border-top-left-radius: 0.25rem;
-                  border-bottom-left-radius: 0.25rem;
-                "
-              />
-            </div>
-            <div class="col-xl-6">
-              <div class="card-body p-md-5 text-black">
-                <h3 class="mb-5 text-uppercase">Register</h3>
+          <div class="card-body p-md-5 text-black">
+            <h3 class="mb-5 text-uppercase">Form</h3>
 
-                <div class="row">
-                  <div class="form-outline">
-                    <label class="form-label label-up" for="form3Example1m"
-                      >Full name</label
-                    >
-                    <input
-                      type="text"
-                      formControlName="fullName"
-                      id="fName"
-                      name="fName"
-                      class="form-control form-control-lg"
-                      [class.is-invalid]="
-                        fullName?.invalid && fullName?.touched
-                      "
-                      [class.is-valid]="fullName?.touched && fullName?.touched"
-                    />
+            <div class="row">
+              <div class="form-outline">
+                <label class="form-label label-up" for="form3Example1m"
+                  >Full name</label
+                >
+                <input
+                  type="text"
+                  formControlName="fullName"
+                  id="fName"
+                  name="fName"
+                  class="form-control form-control-lg"
+                  [class.is-invalid]="fullName?.invalid && fullName?.touched"
+                  [class.is-valid]="fullName?.touched && fullName?.touched"
+                />
 
-                    <!-- Validation messages for Full Name -->
-                    <div
-                      class="alert alert-warning"
-                      [hidden]="!fullName?.touched || !fullName?.errors"
-                    >
-                      <small *ngIf="fullName?.errors?.['required']"
-                        >Full Name is required</small
-                      >
-                      <small *ngIf="fullName?.errors?.['pattern']">
-                        Full name must be at least 3 letters (
-                        {{fullName?.errors?.['pattern'].actualValue}}) doesn't
-                        match
-                      </small>
-                    </div>
-                  </div>
-                </div>
-                <!-- Email -->
-                <div class="form-outline mb-4">
-                  <label class="form-label label-up" for="email">Email</label>
-                  <input
-                    type="email"
-                    formControlName="email"
-                    id="email"
-                    name="email"
-                    class="form-control form-control-lg"
-                    [class.is-invalid]="email?.invalid && email?.touched"
-                    [class.is-valid]="email?.touched && email?.touched"
-                  />
-                  <!-- Validation messages for Email -->
-                  <div
-                    class="alert alert-warning"
-                    [hidden]="!email?.touched || !email?.errors"
-                  >
-                    <small *ngIf="email?.errors?.['required']"
-                      >Email is required</small
-                    >
-                    <small *ngIf="email?.errors?.['EmailNotValid']">
-                      Email must contain '@', and the value '{{ email?.errors?.['EmailNotValid'].value
-
-
-
-
-
-
-
-
-                      }}' doesn't match the required format.
-                    </small>
-                  </div>
-                </div>
-
-                <!-- phone -->
-                <div formArrayName="phoneNo">
-                  <div
-                    class="phone"
-                    *ngFor="let phoneNo of phoneNumber.controls; let i = index"
-                  >
-                    <label for="{{ 'uPhone-' + i + 1 }}"
-                      >Phone {{ i == 0 ? null : i + 1 }}
-                    </label>
-                    <!-- Input for Phone No. -->
-                    <input
-                      type="text"
-                      [formControlName]="i"
-                      class="form-control form-control-lg "
-                      id="{{ 'uPhone-' + i + 1 }}"
-                      name="userPhone"
-                    />
-                    <!-- Remove button for Phone No. -->
-                    <button
-                      [disabled]="!phoneNumber.controls[i].value"
-                      *ngIf="phoneNumber.length > 1"
-                      type="button"
-                      class="btn btn-danger btn-sm ph_input"
-                      (click)="removePhoneNo(i)"
-                    >
-                      Remove
-                    </button>
-                    <!-- Add button for Phone No. -->
-                    <button
-                      [disabled]="!phoneNumber.controls[i].value"
-                      type="button"
-                      class="btn btn-primary mb-3 ph_input"
-                      (click)="addPhoneNo($event)"
-                    >
-                      Add
-                    </button>
-                  </div>
-                </div>
-                <!--  Social Media -->
+                <!-- Validation messages for Full Name -->
                 <div
-                  class="d-md-flex justify-content-start align-items-center mb-4 py-2"
+                  class="alert alert-warning"
+                  [hidden]="!fullName?.touched || !fullName?.errors"
                 >
-                  <h6 class=" ">Referral:</h6>
-                  <div class="form-check referral form-check-inline">
-                    <!-- Radio buttons for Referral -->
-                    <div class="form-check">
-                      <input
-                        type="radio"
-                        formControlName="referral"
-                        class="form-check-input"
-                        id="referral1"
-                        name="referral"
-                        value="Facebook"
-                        (change)="updateReferralValidators()"
-                      />
-                      <label class="form-check-label m_ladel" for="referral1">
-                        Facebook</label
-                      >
-                    </div>
-                    <div class="form-check">
-                      <input
-                        type="radio"
-                        formControlName="referral"
-                        class="form-check-input"
-                        id="referral2"
-                        name="referral"
-                        value="Instagram"
-                        (change)="updateReferralValidators()"
-                      />
-                      <label class="form-check-label m_ladel" for="referral2"
-                        >Instagram</label
-                      >
-                    </div>
-                    <div class="form-check">
-                      <input
-                        type="radio"
-                        formControlName="referral"
-                        class="form-check-input"
-                        id="referral3"
-                        name="referral"
-                        value="LinkedIn"
-                        (change)="updateReferralValidators()"
-                      />
-                      <label class="form-check-label m_ladel" for="referral3"
-                        >LinkedIn
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <label class="form-check-label" for="otherGender"
-                        >Other</label
-                      >
-                      <input
-                        type="radio"
-                        formControlName="referral"
-                        class="form-check-input"
-                        id="rOther"
-                        name="referral"
-                        value="other"
-                        (change)="updateReferralValidators()"
-                      />
-                    </div>
-                  </div>
-                  
-                </div>
-                <!-- Specify other referral -->
-                <div class="other" *ngIf="referral?.value == 'other'">
-                  <label for="rOther" class="m_ladel">Specify</label>
-                  <input
-                    type="text"
-                    formControlName="referralOther"
-                    class="form-control form-control-lg"
-                    id="rOther"
-                    name="rOther"
-                  />
-                </div>
-
-                <!-- address -->
-                <div formGroupName="address">
-                  <div class="form-outline mb-2">
-                    <label class="form-label" for="form3Example90">City</label>
-                    <input
-                      type="text"
-                      formControlName="city"
-                      id="uCity"
-                      name="usercity"
-                      class="form-control form-control-lg"
-                    />
-                  </div>
-
-                  <div class="form-outline mb-2">
-                    <label class="form-label" for="form3Example99"
-                      >Postal Code</label
-                    >
-                    <input
-                      type="text"
-                      formControlName="postalCode"
-                      id="uPostalCode"
-                      name="userpostalcode"
-                      id="form3Example99"
-                      class="form-control form-control-lg"
-                    />
-                  </div>
-
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example97"
-                      >Street</label
-                    >
-                    <input
-                      type="text"
-                      formControlName="street"
-                      id="uStreet"
-                      name="userstreet"
-                      id="form3Example97"
-                      class="form-control form-control-lg"
-                    />
-                  </div>
-                </div>
-
-                <!-- Password -->
-                <div class="mb-3">
-                  <label for="uPassword">Password</label>
-                  <input
-                    type="password"
-                    formControlName="password"
-                      class="form-control form-control-lg"
-                    id="uPassword"
-                    name="confirmPassword"
-                    [class.is-invalid]="
-                      confirmPassword?.value != password?.value &&
-                      !confirmPassword?.invalid
-                    "
-                    [class.is-valid]="
-                      confirmPassword?.value == password?.value &&
-                      !confirmPassword?.invalid
-                    "
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="uConfirmPassword">Confirm Password</label>
-                  <input
-                    type="password"
-                    formControlName="confirmPassword"
-                      class="form-control form-control-lg"
-                    id="uConfirmPassword"
-                    name="confirmPassword"
-                    [class.is-invalid]="
-                      confirmPassword?.value != password?.value &&
-                      !confirmPassword?.invalid
-                    "
-                    [class.is-valid]="
-                      confirmPassword?.value == password?.value &&
-                      !confirmPassword?.invalid
-                    "
-                  />
-                  <!-- Validation messages for Confirm Password -->
-                  <div
-                    class="alert alert-warning"
-                    *ngIf="(confirmPassword?.touched && password?.touched) && (confirmPassword?.invalid || userRegisterForm?.errors?.['UnmatchedPassword'])"
+                  <small *ngIf="fullName?.errors?.['required']"
+                    >Full Name is required</small
                   >
-                    <small *ngIf="confirmPassword?.errors?.['required']">
-                      Confirm Password is required
-                    </small>
-                    <small
-                      *ngIf="userRegisterForm?.errors?.['UnmatchedPassword']"
-                    >
-                      Confirm Password must match the password.
-                    </small>
-                    <small
-                      *ngIf="userRegisterForm?.errors?.['passwordContainsName']"
-                    >
-                      Name and password cannot be the same.
-                    </small>
-                  </div>
+                  <small *ngIf="fullName?.errors?.['pattern']">
+                    Full name must be at least 3 letters (
+                    {{fullName?.errors?.['pattern'].actualValue}}) doesn't match
+                  </small>
                 </div>
-
-                <!-- Submit button -->
-                <button
-                  [disabled]="userRegisterForm.invalid"
-                  type="submit"
-                  class="btn btn-primary"
-                >
-                  Submit
-                </button>
               </div>
             </div>
+            <!-- Email -->
+            <div class="form-outline mb-4">
+              <label class="form-label label-up" for="email">Email</label>
+              <input
+                type="email"
+                formControlName="email"
+                id="email"
+                name="email"
+                class="form-control form-control-lg"
+                [class.is-invalid]="email?.invalid && email?.touched"
+                [class.is-valid]="email?.touched && email?.touched"
+              />
+              <!-- Validation messages for Email -->
+              <div
+                class="alert alert-warning"
+                [hidden]="!email?.touched || !email?.errors"
+              >
+                <small *ngIf="email?.errors?.['required']"
+                  >Email is required</small
+                >
+                <small *ngIf="email?.errors?.['EmailNotValid']">
+                  Email must contain '@', and the value '{{ email?.errors?.['EmailNotValid'].value
+
+
+
+
+
+
+
+
+
+
+                  }}' doesn't match the required format.
+                </small>
+              </div>
+            </div>
+
+            <!-- phone -->
+
+            <div
+              formArrayName="phoneNo"
+              class="form-outline mb-4 phone"
+              *ngFor="let phoneNo of phoneNumber.controls; let i = index"
+            >
+              <label
+                class="ph_lab form-label label-up"
+                for="{{ 'uPhone-' + (i + 1) }}"
+                >Phone {{ i == 0 ? null : i + 1 }}</label
+              >
+              <!-- Input for Phone No. -->
+              <input
+                type="text"
+                [formControlName]="i"
+                class="form-control form-control-lg"
+                id="{{ 'uPhone-' + (i + 1) }}"
+                name="userPhone"
+              />
+              <!-- Remove button for Phone No. -->
+
+              <button
+                [disabled]="
+                  !phoneNumber.controls[i].value || phoneNumber.length == 1
+                "
+                *ngIf="phoneNumber.length > 1"
+                type="button"
+                class="ph_removed"
+                (click)="removePhoneNo(i)"
+              >
+                <i class="fa-sharp fa-solid fa-trash"></i>
+              </button>
+              <!-- Add button for Phone No. -->
+              <button
+                [disabled]="!phoneNumber.controls[i].value"
+                type="button"
+                class="btn-add"
+                (click)="addPhoneNo($event)"
+              >
+                <i class="fa-solid fa-user-plus"></i>
+              </button>
+            </div>
+
+            <!--  Social Media -->
+            <div
+              class="d-md-flex justify-content-start align-items-center mb-4 py-2"
+            >
+              <h6 class="form-label label-up">Referral:</h6>
+              <div class="form-check referral form-check-inline">
+                <!-- Radio buttons for Referral -->
+                <div class="form-check">
+                  <input
+                    type="radio"
+                    formControlName="referral"
+                    class="form-check-input"
+                    id="referral1"
+                    name="referral"
+                    value="Facebook"
+                    (change)="updateReferralValidators()"
+                  />
+                  <label class="form-check-label m_ladel" for="referral1">
+                    Facebook</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="radio"
+                    formControlName="referral"
+                    class="form-check-input"
+                    id="referral2"
+                    name="referral"
+                    value="Instagram"
+                    (change)="updateReferralValidators()"
+                  />
+                  <label class="form-check-label m_ladel" for="referral2"
+                    >Instagram</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="radio"
+                    formControlName="referral"
+                    class="form-check-input"
+                    id="referral3"
+                    name="referral"
+                    value="LinkedIn"
+                    (change)="updateReferralValidators()"
+                  />
+                  <label class="form-check-label m_ladel" for="referral3"
+                    >LinkedIn
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-label label-up" for="otherGender"
+                    >Other</label
+                  >
+                  <input
+                    type="radio"
+                    formControlName="referral"
+                    class="form-check-input"
+                    id="rOther"
+                    name="referral"
+                    value="other"
+                    (change)="updateReferralValidators()"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- Specify other referral -->
+            <div class="other" *ngIf="referral?.value == 'other'">
+              <label for="rOther" class="form-label label-up">Specify</label>
+              <input
+                type="text"
+                formControlName="referralOther"
+                class="form-control form-control-lg"
+                id="rOther"
+                name="rOther"
+              />
+            </div>
+
+            <!-- address -->
+            <div formGroupName="address">
+              <div class="form-outline mb-2">
+                <label class="form-label label-up" for="form3Example90"
+                  >City</label
+                >
+                <input
+                  type="text"
+                  formControlName="city"
+                  id="uCity"
+                  name="usercity"
+                  class="form-control form-control-lg"
+                />
+              </div>
+
+              <div class="form-outline mb-2">
+                <label class="form-label label-up" for="form3Example99"
+                  >Postal Code</label
+                >
+                <input
+                  type="text"
+                  formControlName="postalCode"
+                  id="uPostalCode"
+                  name="userpostalcode"
+                  id="form3Example99"
+                  class="form-control form-control-lg"
+                />
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label label-up" for="form3Example97"
+                  >Street</label
+                >
+                <input
+                  type="text"
+                  formControlName="street"
+                  id="uStreet"
+                  name="userstreet"
+                  id="form3Example97"
+                  class="form-control form-control-lg"
+                />
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="form-label label-up" for="uPassword"
+                >Password</label
+              >
+              <input
+                type="password"
+                formControlName="password"
+                class="form-control form-control-lg"
+                id="uPassword"
+                name="confirmPassword"
+                [class.is-invalid]="
+                confirmPassword?.value !== password?.value ||
+                (confirmPassword?.touched && confirmPassword?.invalid) ||
+                (password?.touched && password?.value?.length < 8)
+              "
+              [class.is-valid]="
+                confirmPassword?.value === password?.value &&
+                confirmPassword?.touched &&
+                !confirmPassword?.invalid &&
+                password?.touched &&
+                password?.value?.length >= 8
+                "
+              />
+              <div class="alert alert-warning" *ngIf="(confirmPassword?.touched && password?.touched) && (confirmPassword?.invalid || userRegisterForm?.errors?.['passwordTooShort'] || userRegisterForm?.errors?.['passwordContainsName'])">
+                <small *ngIf="confirmPassword?.errors?.['required']">Confirm Password is required</small>
+                <small *ngIf="userRegisterForm?.errors?.['UnmatchedPassword']">Confirm Password must match the password.</small>
+                <small *ngIf="userRegisterForm?.errors?.['passwordTooShort']">Password must be at least 8 characters long.</small>
+                <small *ngIf="userRegisterForm?.errors?.['passwordContainsName']">Password cannot contain the name.</small>
+              </div>
+              
+            </div>
+            <div class="mb-3">
+              <label class="form-label label-up" for="uConfirmPassword"
+                >Confirm Password</label
+              >
+              <input
+                type="password"
+                formControlName="confirmPassword"
+                class="form-control form-control-lg"
+                id="uConfirmPassword"
+                name="confirmPassword"
+                [class.is-invalid]="
+                  confirmPassword?.value !== password?.value ||
+                  (confirmPassword?.touched && confirmPassword?.invalid) ||
+                  (password?.touched && password?.value?.length < 8)
+                "
+                [class.is-valid]="
+                  confirmPassword?.value === password?.value &&
+                  confirmPassword?.touched &&
+                  !confirmPassword?.invalid &&
+                  password?.touched &&
+                  password?.value?.length >= 8
+                "
+              />
+              <!-- Validation messages for Confirm Password -->
+              <div class="alert alert-warning" *ngIf="(confirmPassword?.touched && password?.touched) && (confirmPassword?.invalid || userRegisterForm?.errors?.['passwordTooShort'] || userRegisterForm?.errors?.['passwordContainsName'])">
+                <small *ngIf="confirmPassword?.errors?.['required']">Confirm Password is required</small>
+                <small *ngIf="userRegisterForm?.errors?.['UnmatchedPassword']">Confirm Password must match the password.</small>
+                <small *ngIf="userRegisterForm?.errors?.['passwordTooShort']">Password must be at least 8 characters long.</small>
+                <small *ngIf="userRegisterForm?.errors?.['passwordContainsName']">Password cannot contain the name.</small>
+              </div>
+            </div>
+            <!-- <mat-icon>person</mat-icon> -->
+            <!-- Submit button -->
+            <button
+              *ngIf="userRegisterForm.invalid || !userRegisterForm.touched"
+              type="submit"
+              class="btn btn-primary"
+              (click)="submit()"
+            >
+              Submit
+            </button>
           </div>
         </div>
       </div>

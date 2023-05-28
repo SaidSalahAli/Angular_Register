@@ -15,11 +15,17 @@ export function passwordMatch(complexPassword: boolean = false): ValidatorFn {
     if (!passControl || !confirmPassControl || !passControl.value || !confirmPassControl.value) {
       return null;
     }
-
-    // If complexPassword is false and the nameControl and password value are present and the password contains the name, return a validation error
+    
     if (!complexPassword && nameControl && nameControl.value && passControl.value.includes(nameControl.value)) {
       return { passwordContainsName: true };
     }
+
+
+    // If complexPassword is false and the nameControl and password value are present and the password contains the name, return a validation error
+    if ( confirmPassControl.value.length < 8) {
+      return { passwordTooShort: true };
+    }
+   
 
     // Create a validation error object with the password and confirm password values
     const validationError: ValidationErrors = { 'UnmatchedPassword': { 'pass': passControl.value, 'confirmPassword': confirmPassControl.value } };

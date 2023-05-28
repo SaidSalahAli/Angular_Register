@@ -5,20 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserRegisterComponent } from './Component/UserRegister/UserRegister.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
-    UserRegisterComponent
-  ],
+    UserRegisterComponent,
+   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right'}),
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
